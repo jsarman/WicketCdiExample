@@ -27,6 +27,10 @@ public class GuessBean implements Serializable {
     @MaxNumber
     private int maxNumber;
     @Inject
+    @MinNumber
+    private int minNumber;
+    
+    @Inject
     @Random
     Instance<Integer> randomNumber;
     private int number;
@@ -36,7 +40,7 @@ public class GuessBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        this.smallest = 0;
+        this.smallest = minNumber;
         this.remainingGuesses = 10;
         this.biggest = maxNumber;
         this.number = randomNumber.get();
