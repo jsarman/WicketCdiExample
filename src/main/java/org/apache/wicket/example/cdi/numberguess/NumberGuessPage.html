@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:wicket="http://wicket.apache.org/schema/wicket-1.5.xsd"  
+      xml:lang="en"  
+      lang="en">
+    <head>
+        <title>Number Guess Page</title>
+    </head>
+    <body>   
+        <wicket:extend>
+            <div>
+                <div wicket:id="feedback"/>
+                <form  wicket:id="form">
+                    <label>Enter Guess</label> : <input wicket:id="guess" type="text" size="10"/>
+                    <input type="submit"/>
+                </form>
+                <a href="*" wicket:id="reset">Reset</a>
+            </div>        
+        </wicket:extend>
+    </body>
+</html>
