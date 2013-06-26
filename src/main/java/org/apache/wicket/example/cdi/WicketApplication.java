@@ -1,9 +1,5 @@
 package org.apache.wicket.example.cdi;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.CDI;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import org.apache.wicket.cdi.CdiConfiguration;
 import org.apache.wicket.cdi.ConversationPropagation;
 import org.apache.wicket.markup.html.WebPage;
@@ -30,10 +26,11 @@ public class WicketApplication extends WebApplication {
      */
     @Override
     public void init() {
-        super.init();    
-        BeanManager beanManager = CDI.current().getBeanManager();
-        new CdiConfiguration(beanManager)
-                .setPropagation(ConversationPropagation.NONBOOKMARKABLE)
-                .configure(this);       
+        
+            super.init();
+            CdiConfiguration.get()
+                    .setPropagation(ConversationPropagation.NONBOOKMARKABLE)
+                    .configure(this);
+        
     }
 }

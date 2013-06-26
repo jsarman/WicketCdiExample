@@ -7,8 +7,8 @@ package org.apache.wicket.example.cdi.numberguess;
 import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
 import org.apache.wicket.example.cdi.ExamplePage;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
+import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -36,22 +36,19 @@ public class NumberGuessPage extends ExamplePage {
 
     public NumberGuessPage(PageParameters parameters) {
 
-        //setStatelessHint(true);
+        setStatelessHint(true);
         if (conversation.isTransient()) {
             conversation.begin();
         }
 
         LOGGER.info("Beginning new Conversation with cid = {}", conversation.getId());
-
-
-        final String id = conversation.getId();
         add(new FeedbackPanel("feedback"));
 
         final TextField<Integer> guess = new RequiredTextField<>("guess", new PropertyModel(this, "guessedNumber"));
         guess.add(guessBean.getValidator());
         guess.setType(Integer.class);
 
-        Form<?> form = new Form<Void>("form") {
+        StatelessForm<?> form = new StatelessForm<Void>("form") {
             @Override
             protected void onSubmit() {
                 try {                    
@@ -68,7 +65,6 @@ public class NumberGuessPage extends ExamplePage {
                             break;
                     }
                 } catch (Exception e) {
-
                     error("No more Tries Left");
                 }
             }
